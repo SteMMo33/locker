@@ -4,6 +4,9 @@ import QtQuick.Layouts 1.3
 Rectangle {
     id: mainPage
 
+    FontLoader { id: proximaNovaBold; source: "fonts/ProximaNova-Bold.otf" }
+    FontLoader { id: proximaNovaRegular; source: "fonts/ProximaNova-Regular.otf" }
+
     width: 700
     height: 480
     color: "#000000"
@@ -76,6 +79,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 0
             font.pixelSize: 30
+            font.family: "ProximaNova-Bold"
         }
 
 
@@ -114,17 +118,24 @@ Rectangle {
 
     Item {
         id: pnlPos
-        anchors.fill: parent
+        anchors.top: header.bottom
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.topMargin: 10
         visible: false
 
         Text {
-            id: text4
-            x: 43
-            y: 60
-            width: 86
+            id: msgPos
             height: 36
             color: "#f9f8f8"
             text: qsTr("POS")
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.top: parent.top
+            anchors.topMargin: 30
             font.pixelSize: 30
         }
 
@@ -157,7 +168,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.topMargin: 20
-        visible: false
+        visible: true
 
         Text {
             id: pnlCodiceMessaggio
@@ -165,18 +176,68 @@ Rectangle {
             width: 86
             height: 36
             color: "#f9f8f8"
-            text: qsTr("Codice")
+            text: qsTr("Inserire il codice ricevuto oppure passare il QRCode davanti al lettore")
+            wrapMode: Text.WordWrap
+            anchors.right: parent.right
+            anchors.rightMargin: 50
+            anchors.left: parent.left
+            anchors.leftMargin: 50
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            visible: false
+            visible: true
             font.pixelSize: 30
+            font.family: "ProximaNova Bold"
+        }
+
+        GridLayout {
+            id: gridLayout
+            x: 142
+            y: 114
+            width: 391
+            height: 216
+            visible: true
+            rows: 4
+            columns: 3
+
+            ButtonKey {
+                id: buttonKey1
+                title: "1"
+            }
+
+            ButtonKey {
+                id: buttonKey2
+                title: "2"
+            }
+
+            ButtonKey {
+                id: buttonKey3
+                visible: true
+                title: "3"
+            }
+
+            ButtonKey {
+                id: buttonKey4
+                title: "4"
+            }
+
+            ButtonKey {
+                id: buttonKey5
+                title: "5"
+            }
+
+            ButtonKey {
+                id: buttonKey6
+                title: "6"
+            }
         }
 
         MouseArea {
             id: mouseArea2
             anchors.fill: parent
             onClicked: mainPage.state = ""
+
         }
+
     }
 
 
@@ -202,16 +263,12 @@ Rectangle {
 
             PropertyChanges {
                 target: pnlCodiceMessaggio
-                x: 112
-                y: 19
-                width: 477
-                height: 149
                 text: qsTr("Inserire il codice ricevuto oppure passare il QRCode davanti al lettore")
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 26
                 wrapMode: Text.WordWrap
                 visible: true
-                anchors.rightMargin: 292
-                anchors.leftMargin: 322
             }
         },
         State {
@@ -228,6 +285,10 @@ Rectangle {
                 y: 116
                 width: 624
                 height: 356
+                anchors.topMargin: 10
+                anchors.rightMargin: 8
+                anchors.leftMargin: 8
+                anchors.bottomMargin: 8
                 visible: true
             }
 
@@ -252,9 +313,12 @@ Rectangle {
             }
 
             PropertyChanges {
-                target: text4
+                target: msgPos
                 x: 149
                 y: 40
+                font.pixelSize: 35
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
             }
 
             PropertyChanges {
